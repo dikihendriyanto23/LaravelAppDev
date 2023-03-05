@@ -2,6 +2,7 @@
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
@@ -40,9 +41,16 @@ Route::any('/categories', function () {
 });
 
 Route::any('/categories/{category:slug}', function (Category $category) {
-    return view('category',[
-        'title' => $category->name,
-        'posts' => $category->posts,
+    return view('posts',[
+        'title' => "Posts by Category: $category->name",
+        'posts' => $category->posts->load('category', 'author'),
         'category' => $category->name
+    ]);
+});
+
+Route::any('/authors/{author}', function (User $author) {
+    return view('posts',[
+        'title' => "Posts by Author: $author->name",
+        'posts' => $author->posts->load('category', 'author'),
     ]);
 });
