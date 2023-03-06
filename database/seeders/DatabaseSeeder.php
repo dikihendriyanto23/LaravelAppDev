@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)->create();
+        User::factory(4)->create();
 
         // User::create([
         //     'name' => 'Muhammad Diki Hendriyanto',
@@ -40,7 +40,12 @@ class DatabaseSeeder extends Seeder
             'slug' => 'personal'
         ]);
 
-        Post::factory(10)->create();
+        Category::create([
+            'name' => 'Design',
+            'slug' => 'design'
+        ]);
+
+        Post::factory(20)->create();
 
         // Post::create([
         //     'title' => 'Judul Pertama',
